@@ -35,3 +35,26 @@
 //     console.log(key, obj[key]);
     
 // }
+
+//callback hell
+function connectToServer(cbfn){
+    console.log("Connecting to server...");
+    setTimeout(()=>{
+        console.log("Connected to server");
+        cbfn();
+    },2000)
+}
+
+function fetchData(cbfn){
+    console.log("Fetching data...");
+    setTimeout(()=>{
+        console.log("Data fetched");
+        cbfn(["course1", "course2", "course3"]);
+    },2000);
+}
+
+connectToServer(function(){
+    fetchData(function(data){
+        console.log("Data received:", data);
+    });
+});
