@@ -70,42 +70,42 @@
 //     });
 // }
 
-//writing file using fs module
+// //writing file using fs module
 const fs = require('fs');
-fs.writeFile("example.txt", "Hello, this is a test file.", (err) => {
-    if (err) {
-        console.error("Error writing file:", err);
-    } else {
-        console.log("File written successfully.");
-    }
-});
+// fs.writeFile("example.txt", "Hello, this is a test file.", (err) => {
+//     if (err) {
+//         console.error("Error writing file:", err);
+//     } else {
+//         console.log("File written successfully.");
+//     }
+// });
 
-//reading file using fs module
-fs.readFile("example.txt","Utf8",(err, data) => {
-    if (err) {
-        console.error("Error reading file:", err);
-    } else {
-        console.log("File content:", data);
-    }       
-});
+// //reading file using fs module
+// fs.readFile("example.txt","Utf8",(err, data) => {
+//     if (err) {
+//         console.error("Error reading file:", err);
+//     } else {
+//         console.log("File content:", data);
+//     }       
+// });
 
-//appending to file using fs module
-fs.appendFile("example.txt", "\nThis is appended text.", (err) => {
-    if (err) {
-        console.error("Error appending to file:", err);
-    } else {
-        console.log("Text appended successfully.");
-    }
-});
+// //appending to file using fs module
+// fs.appendFile("example.txt", "\nThis is appended text.", (err) => {
+//     if (err) {
+//         console.error("Error appending to file:", err);
+//     } else {
+//         console.log("Text appended successfully.");
+//     }
+// });
 
-//renaming file using fs module
-fs.rename("example.txt", "renamed_example.txt", (err) => {
-    if (err) {
-        console.error("Error renaming file:", err);
-    } else {
-        console.log("File renamed successfully.");
-    }
-});
+// //renaming file using fs module
+// fs.rename("example.txt", "renamed_example.txt", (err) => {
+//     if (err) {
+//         console.error("Error renaming file:", err);
+//     } else {
+//         console.log("File renamed successfully.");
+//     }
+// });
 
 //deleting file using fs module
 fs.unlink("renamed_example.txt", (err) => {
