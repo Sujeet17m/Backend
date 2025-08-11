@@ -97,3 +97,12 @@ fs.appendFile("example.txt", "\nThis is appended text.", (err) => {
         console.log("Text appended successfully.");
     }
 });
+
+//renaming file using fs module
+fs.rename("example.txt", "renamed_example.txt", (err) => {
+    if (err) {
+        console.error("Error renaming file:", err);
+    } else {
+        console.log("File renamed successfully.");
+    }
+});
