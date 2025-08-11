@@ -106,3 +106,12 @@ fs.rename("example.txt", "renamed_example.txt", (err) => {
         console.log("File renamed successfully.");
     }
 });
+
+//deleting file using fs module
+fs.unlink("renamed_example.txt", (err) => {
+    if (err) {
+        console.error("Error deleting file:", err);
+    } else {
+        console.log("File deleted successfully.");
+    }
+});
