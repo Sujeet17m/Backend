@@ -88,3 +88,12 @@ fs.readFile("example.txt","Utf8",(err, data) => {
         console.log("File content:", data);
     }       
 });
+
+//appending to file using fs module
+fs.appendFile("example.txt", "\nThis is appended text.", (err) => {
+    if (err) {
+        console.error("Error appending to file:", err);
+    } else {
+        console.log("Text appended successfully.");
+    }
+});
