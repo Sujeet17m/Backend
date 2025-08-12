@@ -108,10 +108,18 @@ const fs = require('fs');
 // });
 
 //deleting file using fs module
-fs.unlink("renamed_example.txt", (err) => {
-    if (err) {
-        console.error("Error deleting file:", err);
-    } else {
-        console.log("File deleted successfully.");
-    }
+// fs.unlink("renamed_example.txt", (err) => {
+//     if (err) {
+//         console.error("Error deleting file:", err);
+//     } else {
+//         console.log("File deleted successfully.");
+//     }
+// });
+
+//creating a server in http
+const http = require('http');
+http.createServer((req,res)=>{
+    res.end("Hii, this is a server response!");
+}).listen(3000, () => {
+    console.log("Server is running on port 3000");
 });
