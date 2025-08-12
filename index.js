@@ -119,6 +119,7 @@ const fs = require('fs');
 //creating a server in http
 const http = require('http');
 http.createServer((req,res)=>{
+    res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end("Hii, this is a server response!");
 }).listen(3000, () => {
     console.log("Server is running on port 3000");
