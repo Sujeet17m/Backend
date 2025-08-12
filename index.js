@@ -117,10 +117,37 @@ const fs = require('fs');
 // });
 
 //creating a server in http
+// const http = require('http');
+// http.createServer((req,res)=>{
+//     res.writeHead(200, {'Content-Type': 'text/plain'});
+//     res.end("Hello,is a server response!");
+// }).listen(3000, () => {
+//     console.log("Server is running on port 3000");
+// });
+
+// const http = require('http');
+
+// http.createServer((req, res) => {
+//   if (req.url === '/') {
+//     res.writeHead(301, { 'Location': '/new-page' });
+//     res.end();
+//   } else if (req.url === '/new-page') {
+//     res.end('Welcome to the new page!');
+//   }
+// }).listen(3000, () => console.log('Server running on port 3000'));
+
 const http = require('http');
-http.createServer((req,res)=>{
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end("Hii, this is a server response!");
-}).listen(3000, () => {
-    console.log("Server is running on port 3000");
+
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end("Welcome Home!");
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end("404 - Not Found");
+  }
+});
+
+server.listen(3000, () => {
+  console.log("Server running at http://localhost:3000/");
 });
