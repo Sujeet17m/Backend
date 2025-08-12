@@ -136,18 +136,32 @@ const fs = require('fs');
 //   }
 // }).listen(3000, () => console.log('Server running on port 3000'));
 
-const http = require('http');
+// const http = require('http');
 
-const server = http.createServer((req, res) => {
-  if (req.url === "/") {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end("Welcome Home!");
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end("404 - Not Found");
-  }
+// const server = http.createServer((req, res) => {
+//   if (req.url === "/") {
+//     res.writeHead(200, { 'Content-Type': 'text/plain' });
+//     res.end("Welcome Home!");
+//   } else {
+//     res.writeHead(404, { 'Content-Type': 'text/plain' });
+//     res.end("404 - Not Found");
+//   }
+// });
+
+// server.listen(3000, () => {
+//   console.log("Server running at http://localhost:3000/");
+// });
+
+//express server
+const express = require('express');
+const app = express();
+const PORT = 5000;
+app.get('/', (req, res) => {
+    res.send("Welcome to the Express server!");
+}); 
+app.get('/about', (req, res) => {
+    res.send("This is the about page.");
 });
-
-server.listen(3000, () => {
-  console.log("Server running at http://localhost:3000/");
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
