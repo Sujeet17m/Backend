@@ -196,28 +196,28 @@ const fs = require('fs');
 //   console.log("Server is running on http://localhost:5000");
 // });
 
-const express = require('express');
-const app = express();
+// const express = require('express');
+// const app = express();
 
-// Example routes
-app.get('/', (req, res) => {
-  res.send('Welcome to Home Page');
-});
+// // Example routes
+// app.get('/', (req, res) => {
+//   res.send('Welcome to Home Page');
+// });
 
-app.get('/about', (req, res) => {
-  res.send('About Us Page');
-});
+// app.get('/about', (req, res) => {
+//   res.send('About Us Page');
+// });
 
-// Handle Nonexistent Routes (404)
-app.use((req, res) => {
-  res.status(404).json({
-    error: 'Route not found',
-    message: `The requested URL ${req.originalUrl} was not found on this server`
-  });
-});
+// // Handle Nonexistent Routes (404)
+// app.use((req, res) => {
+//   res.status(404).json({
+//     error: 'Route not found',
+//     message: `The requested URL ${req.originalUrl} was not found on this server`
+//   });
+// });
 
-// Start server
-app.listen(5000, () => console.log('Server running on port 5000'));
+// // Start server
+// app.listen(5000, () => console.log('Server running on port 5000'));
 
 //jab bhi aap browser se koi request backend server ko bhejte ho,to wo apne route par jaati hai
 //toh backend server us request ko handle karta hai aur response bhejta hai.
@@ -226,6 +226,21 @@ app.listen(5000, () => console.log('Server running on port 5000'));
 // and agar app chaahte hai route par jaane se pahle koi kaam karna hai toh wo middleware ke through hota hai
 // and agar app chaahte hai route par jaane se pahle wo request mein kuch check karna hai toh wo bhi middleware ke through hota hai ya fir aap kuch jodna chahte ho toh wo bhi middleware ke through hota hai.
 // middleware ka kaam hai request ko handle karna aur response bhejna
+
+const express = require('express');
+const app = express();
+
+// Custom middleware for logging
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
+  next(); // Move to the next middleware or route handler
+});
+
+app.get('/', (req, res) => {
+  res.send('Hello, Middleware!');
+});
+
+app.listen(3000, () => console.log('Server running on port 3000'));
 
 
 
