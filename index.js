@@ -280,41 +280,72 @@ const fs = require('fs');
 // app.listen(5000, () => console.log('Server running on port 5000'));
 
 
-const express = require('express');
-const session = require('express-session');
-const flash = require('connect-flash');
+// const express = require('express');
+// const session = require('express-session');
+// const flash = require('connect-flash');
+
+// const app = express();
+
+// // Setup session middleware (required for connect-flash)
+// app.use(session({
+//   secret: 'mySecretKey',
+//   resave: false,
+//   saveUninitialized: true
+// }));
+
+// // Setup flash middleware
+// app.use(flash());
+
+// // Middleware to pass flash messages to all views
+// app.use((req, res, next) => {
+//   res.locals.success_msg = req.flash('success_msg');
+//   res.locals.error_msg = req.flash('error_msg');
+//   next();
+// });
+
+// // Route to set a flash message
+// app.get('/login', (req, res) => {
+//   req.flash('success_msg', 'You have logged in successfully!');
+//   res.redirect('/dashboard');
+// });
+
+// // Route to display flash message
+// app.get('/dashboard', (req, res) => {
+//   res.send(`
+//     <h1>Dashboard</h1>
+//     <p>${res.locals.success_msg}</p>
+//   `);
+// });
+
+// app.listen(5000, () => console.log('Server started on port 5000'));
+
+//CORS
+/*browser mein ek security feature hota hai, jiske tahat aap kisi aur web domain ka data nahi manga sakte ya show nai kar sakte hai and browser isse apko rokta hai, ab agar aap chaahte hai ki browser allow kare data ko laane ke liye, to fir aapko us website ke server ke through CORS enable karna padega */
+
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
 
-// Setup session middleware (required for connect-flash)
-app.use(session({
-  secret: 'mySecretKey',
-  resave: false,
-  saveUninitialized: true
-}));
+// Enable CORS for all routes & origins
+app.use(cors());
 
-// Setup flash middleware
-app.use(flash());
+// Example CORS for specific origin
+// app.use(cors({ origin: 'http://example.com' }));
+// Example CORS for specific methods
+// app.use(cors({ methods: ['GET', 'POST'] }));
+// Example CORS for specific headers
+// app.use(cors({ allowedHeaders: ['Content-Type', 'Authorization'] }));
+// Example CORS for credentials
+// app.use(cors({ credentials: true }));
+// Example CORS for specific route
+// app.get('/api/data', cors(), (req, res) => {
+//   res.json({ message: "This is CORS-enabled for a specific route!" });
 
-// Middleware to pass flash messages to all views
-app.use((req, res, next) => {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  next();
+app.get("/", (req, res) => {
+  res.json({ message: "CORS is working!" });
 });
 
-// Route to set a flash message
-app.get('/login', (req, res) => {
-  req.flash('success_msg', 'You have logged in successfully!');
-  res.redirect('/dashboard');
-});
-
-// Route to display flash message
-app.get('/dashboard', (req, res) => {
-  res.send(`
-    <h1>Dashboard</h1>
-    <p>${res.locals.success_msg}</p>
-  `);
-});
-
-app.listen(5000, () => console.log('Server started on port 5000'));
+app.listen(5000, () => console.log("Server running on port 5000"));
+// To test CORS, you can use a tool like Postman or a frontend application that makes requests to this server.
+// You can also test it by making a request from a different origin (like a different port or domain) to see if the CORS headers are correctly applied.
