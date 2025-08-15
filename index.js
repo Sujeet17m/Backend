@@ -219,6 +219,13 @@ app.use((req, res) => {
 // Start server
 app.listen(5000, () => console.log('Server running on port 5000'));
 
+//jab bhi aap browser se koi request backend server ko bhejte ho,to wo apne route par jaati hai
+//toh backend server us request ko handle karta hai aur response bhejta hai.
+// agar aapne koi route define nahi kiya hai toh wo 404 error bhejta hai
+// agar aapne koi route define kiya hai toh wo us route par jaata hai aur response bhejta hai.
+// and agar app chaahte hai route par jaane se pahle koi kaam karna hai toh wo middleware ke through hota hai
+// and agar app chaahte hai route par jaane se pahle wo request mein kuch check karna hai toh wo bhi middleware ke through hota hai ya fir aap kuch jodna chahte ho toh wo bhi middleware ke through hota hai.
+// middleware ka kaam hai request ko handle karna aur response bhejna
 
 
 
