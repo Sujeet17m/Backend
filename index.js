@@ -227,20 +227,94 @@ const fs = require('fs');
 // and agar app chaahte hai route par jaane se pahle wo request mein kuch check karna hai toh wo bhi middleware ke through hota hai ya fir aap kuch jodna chahte ho toh wo bhi middleware ke through hota hai.
 // middleware ka kaam hai request ko handle karna aur response bhejna
 
+// const express = require('express');
+// const app = express();
+
+// // Custom middleware for logging
+// app.use((req, res, next) => {
+//   console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
+//   next(); // Move to the next middleware or route handler
+// });
+
+// app.get('/', (req, res) => {
+//   res.send('Hello, Middleware!');
+// });
+
+// app.listen(5000, () => console.log('Server running on port 5000'));
+
+// const express = require('express');
+// const session = require('express-session');
+
+// const app = express();
+
+// // Configure session middleware
+// app.use(session({
+//   secret: 'mySuperSecretKey', // used to sign the session ID cookie
+//   resave: false,              // don't save session if unmodified
+//   saveUninitialized: true,    // save new sessions even if empty
+//   cookie: { maxAge: 60000 }    // session expires after 1 min
+// }));
+
+// // Set session data
+// app.get('/login', (req, res) => {
+//   req.session.username = 'JohnDoe';
+//   res.send('User logged in and session started');
+// });
+
+// // Access session data
+// app.get('/profile', (req, res) => {
+//   if (req.session.username) {
+//     res.send(`Welcome back, ${req.session.username}!`);
+//   } else {
+//     res.send('Please log in first.');
+//   }
+// });
+
+// // Destroy session
+// app.get('/logout', (req, res) => {
+//   req.session.destroy(() => {
+//     res.send('Session ended');
+//   });
+// });
+
+// app.listen(5000, () => console.log('Server running on port 5000'));
+
+
 const express = require('express');
+const session = require('express-session');
+const flash = require('connect-flash');
+
 const app = express();
 
-// Custom middleware for logging
+// Setup session middleware (required for connect-flash)
+app.use(session({
+  secret: 'mySecretKey',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Setup flash middleware
+app.use(flash());
+
+// Middleware to pass flash messages to all views
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
-  next(); // Move to the next middleware or route handler
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello, Middleware!');
+// Route to set a flash message
+app.get('/login', (req, res) => {
+  req.flash('success_msg', 'You have logged in successfully!');
+  res.redirect('/dashboard');
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+// Route to display flash message
+app.get('/dashboard', (req, res) => {
+  res.send(`
+    <h1>Dashboard</h1>
+    <p>${res.locals.success_msg}</p>
+  `);
+});
 
-
-
+app.listen(5000, () => console.log('Server started on port 5000'));
