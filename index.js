@@ -153,29 +153,29 @@ const fs = require('fs');
 // });
 
 // express server
-const express = require('express');
-const app = express();
-const PORT = 5000;
+// const express = require('express');
+// const app = express();
+// const PORT = 5000;
 
-app.get('/', (req, res) => {
-  res.send("Welcome to the Express server!");
-}); 
+// app.get('/', (req, res) => {
+//   res.send("Welcome to the Express server!");
+// }); 
 
-app.get('/about', (req, res) => {
-  res.send("This is the about page.");
-});
+// app.get('/about', (req, res) => {
+//   res.send("This is the about page.");
+// });
 
-app.get('/:id', (req, res) => {
-  res.send("hii");
-});
-// Handle 404 for undefined routes
-app.use((req, res) => {
-  res.status(404).send("404 - Page Not Found");
-});
+// app.get('/:id', (req, res) => {
+//   res.send("hii");
+// });
+// // Handle 404 for undefined routes
+// app.use((req, res) => {
+//   res.status(404).send("404 - Page Not Found");
+// });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// });
 
 // const express = require("express");
 // const app = express();
@@ -195,6 +195,29 @@ app.listen(PORT, () => {
 // app.listen(5000, () => {
 //   console.log("Server is running on http://localhost:5000");
 // });
+
+const express = require('express');
+const app = express();
+
+// Example routes
+app.get('/', (req, res) => {
+  res.send('Welcome to Home Page');
+});
+
+app.get('/about', (req, res) => {
+  res.send('About Us Page');
+});
+
+// Handle Nonexistent Routes (404)
+app.use((req, res) => {
+  res.status(404).json({
+    error: 'Route not found',
+    message: `The requested URL ${req.originalUrl} was not found on this server`
+  });
+});
+
+// Start server
+app.listen(5000, () => console.log('Server running on port 5000'));
 
 
 
