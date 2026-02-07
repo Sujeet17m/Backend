@@ -343,7 +343,7 @@ app.use(cors());
 //   res.json({ message: "This is CORS-enabled for a specific route!" });
 
 app.get("/", (req, res) => {
-  res.json({ message: "CORS is working!" });
+  res.json({ message: "CORS is working!"});
 });
 
 app.listen(5000, () => console.log("Server running on port 5000"));
